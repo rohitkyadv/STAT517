@@ -1,0 +1,1673 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{ Final Project-Climate Analysis and Prediction}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Final Project: Climate Analysis and
+Prediction}\label{final-project-climate-analysis-and-prediction}
+
+    \subsection{1. Problem Statement, Motivation, Research
+Goals:}\label{problem-statement-motivation-research-goals}
+
+    Global climate change and its impact on human life has become one of our
+era's greatest challenges. Despite the urgency, data science has had
+little impact on furthering our understanding of our planet in spite of
+the abundance of climate data. A lot remains to be understood about our
+planet and the physical processes that govern it to effectively answer
+questions about global climate change and its societal impacts. It has
+been proposed that given the abundance of climate data from different
+regression models observations and different analysis, we may close some
+of these knowledge gaps by directly learning from these large climate
+datasets.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{scipy} \PY{k}{as} \PY{n+nn}{sp}
+        \PY{k+kn}{import} \PY{n+nn}{string}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{feature\PYZus{}extraction}\PY{n+nn}{.}\PY{n+nn}{text} \PY{k}{import} \PY{n}{TfidfVectorizer}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{decomposition} \PY{k}{import} \PY{n}{PCA}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LinearRegression}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{Ridge}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{neighbors} \PY{k}{import} \PY{n}{KNeighborsRegressor}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k}{import} \PY{n}{GradientBoostingRegressor}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{tree} \PY{k}{import} \PY{n}{DecisionTreeRegressor}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{cluster} \PY{k}{import} \PY{n}{AgglomerativeClustering}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{cluster} \PY{k}{import} \PY{n}{KMeans}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{mixture} \PY{k}{import} \PY{n}{GaussianMixture}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{cluster} \PY{k}{import} \PY{n}{SpectralClustering}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{cluster} \PY{k}{import} \PY{n}{AgglomerativeClustering}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{silhouette\PYZus{}score}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{StandardScaler}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{neural\PYZus{}network} \PY{k}{import} \PY{n}{MLPClassifier}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{neighbors} \PY{k}{import} \PY{n}{KNeighborsClassifier}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{tree} \PY{k}{import} \PY{n}{DecisionTreeClassifier}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k}{import} \PY{n}{RandomForestClassifier}\PY{p}{,} \PY{n}{AdaBoostClassifier}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{naive\PYZus{}bayes} \PY{k}{import} \PY{n}{GaussianNB}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{roc\PYZus{}curve}\PY{p}{,} \PY{n}{auc}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{label\PYZus{}binarize}
+        \PY{k+kn}{import} \PY{n+nn}{time}
+        \PY{k+kn}{from} \PY{n+nn}{wordcloud} \PY{k}{import} \PY{n}{WordCloud}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{feature\PYZus{}extraction}\PY{n+nn}{.}\PY{n+nn}{text} \PY{k}{import} \PY{n}{TfidfVectorizer}
+        \PY{k+kn}{import} \PY{n+nn}{pandas\PYZus{}profiling} \PY{k}{as} \PY{n+nn}{pp}
+        \PY{k+kn}{from} \PY{n+nn}{mlxtend}\PY{n+nn}{.}\PY{n+nn}{frequent\PYZus{}patterns} \PY{k}{import} \PY{n}{apriori}
+        \PY{k+kn}{from} \PY{n+nn}{mlxtend}\PY{n+nn}{.}\PY{n+nn}{frequent\PYZus{}patterns} \PY{k}{import} \PY{n}{association\PYZus{}rules}
+        \PY{k+kn}{import} \PY{n+nn}{math}
+        \PY{k+kn}{from} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{tsa}\PY{n+nn}{.}\PY{n+nn}{seasonal} \PY{k}{import} \PY{n}{seasonal\PYZus{}decompose}
+        \PY{k+kn}{from} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{colors} \PY{k}{import} \PY{n}{ListedColormap}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/Users/rohit1/anaconda3/lib/python3.6/site-packages/pandas\_profiling/plot.py:15: UserWarning: matplotlib.pyplot as already been imported, this call will have no effect.
+  matplotlib.use(BACKEND)
+
+    \end{Verbatim}
+
+    \subsection{2. Data Source and
+Description:}\label{data-source-and-description}
+
+    Where/how do you get the data?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} read file}
+        \PY{n}{originaldata} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{./DelhiWeather.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{originaldata}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+        \PY{n}{originaldata}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(100990, 20)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:}              Date Condition  Dew Point  Fog  Hail  Heat Index  Humidity  \textbackslash{}
+        0  19961101-11:00     Smoke        9.0    0     0         NaN      27.0   
+        1  19961101-12:00     Smoke       10.0    0     0         NaN      32.0   
+        2  19961101-13:00     Smoke       11.0    0     0         NaN      44.0   
+        3  19961101-14:00     Smoke       10.0    0     0         NaN      41.0   
+        4  19961101-16:00     Smoke       11.0    0     0         NaN      47.0   
+        
+           Precipitation  Pressure  Rain  Snow  Temperature  Thunder  Tornado  \textbackslash{}
+        0            NaN    1010.0     0     0         30.0        0        0   
+        1            NaN   -9999.0     0     0         28.0        0        0   
+        2            NaN   -9999.0     0     0         24.0        0        0   
+        3            NaN    1010.0     0     0         24.0        0        0   
+        4            NaN    1011.0     0     0         23.0        0        0   
+        
+           Visibility  Wind Direction Degrees Wind Direction Cardinal  Wind Gust  \textbackslash{}
+        0         5.0                   280.0                    West        NaN   
+        1         NaN                     0.0                   North        NaN   
+        2         NaN                     0.0                   North        NaN   
+        3         2.0                     0.0                   North        NaN   
+        4         1.2                     0.0                   North        NaN   
+        
+           Wind Chill  Wind Speed  
+        0         NaN         7.4  
+        1         NaN         NaN  
+        2         NaN         NaN  
+        3         NaN         NaN  
+        4         NaN         0.0  
+\end{Verbatim}
+            
+    \subsection{3. Literature Review and
+References:}\label{literature-review-and-references}
+
+    This could include noting any key papers, texts, or websites that you
+have used to develop your modeling approach, as well as what others have
+done on this problem in the past. You must properly credit sources.
+
+    \subsection{4. Preliminary EDA:}\label{preliminary-eda}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} First I drop columns that are not complete or not useful}
+        \PY{n}{data} \PY{o}{=} \PY{n}{originaldata}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Precipitation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Wind Chill}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Wind Direction Cardinal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Wind Gust}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Heat Index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Wind Direction Degrees}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Pressure \PYZhy{}9999 is missing data so I replace with Nan and we will use imputation later}
+        \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pressure}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pressure}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{9999.0}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{NaN}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Four of the temperature observations are in Fahrenheit so we must convert}
+        \PY{n}{data}\PY{o}{.}\PY{n}{at}\PY{p}{[}\PY{l+m+mi}{91391}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Temperature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n+nb}{float}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{9}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{at}\PY{p}{[}\PY{l+m+mi}{91391}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Temperature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{l+m+mi}{32}\PY{p}{)}
+        \PY{n}{data}\PY{o}{.}\PY{n}{at}\PY{p}{[}\PY{l+m+mi}{11084}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Temperature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n+nb}{float}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{9}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{at}\PY{p}{[}\PY{l+m+mi}{11084}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Temperature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{l+m+mi}{32}\PY{p}{)}
+        \PY{n}{data}\PY{o}{.}\PY{n}{at}\PY{p}{[}\PY{l+m+mi}{12951}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Temperature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n+nb}{float}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{9}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{at}\PY{p}{[}\PY{l+m+mi}{12951}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Temperature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{l+m+mi}{32}\PY{p}{)}
+        \PY{n}{data}\PY{o}{.}\PY{n}{at}\PY{p}{[}\PY{l+m+mi}{68077}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Temperature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n+nb}{float}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{9}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{at}\PY{p}{[}\PY{l+m+mi}{68077}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Temperature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{l+m+mi}{32}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} One of the visibility observations is in meters instead of kilometers so we must convert}
+        \PY{n}{data}\PY{o}{.}\PY{n}{at}\PY{p}{[}\PY{l+m+mi}{58253}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Visibility}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{/}\PY{o}{=} \PY{l+m+mi}{1000}
+        \PY{c+c1}{\PYZsh{} Some of the pressure observations are so high or low they must be mistakes so we will drop them}
+        \PY{c+c1}{\PYZsh{} Some of the wind speed observations are so high they must be mistakes so we will drop them}
+        \PY{c+c1}{\PYZsh{} Some of the humidity observations are above 100\PYZpc{} so we will drop them}
+        \PY{c+c1}{\PYZsh{} Some of the visibility observations are 10 times higher than normal so we will divide them}
+        \PY{k}{for} \PY{n}{index}\PY{p}{,} \PY{n}{row} \PY{o+ow}{in} \PY{n}{data}\PY{o}{.}\PY{n}{iterrows}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{k}{if} \PY{n}{data}\PY{o}{.}\PY{n}{at}\PY{p}{[}\PY{n}{index}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pressure}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{l+m+mi}{900} \PY{o+ow}{or} \PY{n}{data}\PY{o}{.}\PY{n}{at}\PY{p}{[}\PY{n}{index}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pressure}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{1200}\PY{p}{:}
+                \PY{n}{data}\PY{o}{.}\PY{n}{at}\PY{p}{[}\PY{n}{index}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pressure}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{NaN}
+            \PY{k}{if} \PY{n}{data}\PY{o}{.}\PY{n}{at}\PY{p}{[}\PY{n}{index}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Wind Speed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{300}\PY{p}{:}
+                \PY{n}{data}\PY{o}{.}\PY{n}{at}\PY{p}{[}\PY{n}{index}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Wind Speed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{NaN}
+            \PY{k}{if} \PY{n}{data}\PY{o}{.}\PY{n}{at}\PY{p}{[}\PY{n}{index}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Humidity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{100}\PY{p}{:}
+                \PY{n}{data}\PY{o}{.}\PY{n}{at}\PY{p}{[}\PY{n}{index}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Wind Speed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{NaN}
+            \PY{k}{if} \PY{n}{data}\PY{o}{.}\PY{n}{at}\PY{p}{[}\PY{n}{index}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Visibility}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{10}\PY{p}{:}
+                \PY{n}{data}\PY{o}{.}\PY{n}{at}\PY{p}{[}\PY{n}{index}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Visibility}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{/}\PY{o}{=} \PY{l+m+mi}{10}
+        \PY{n}{pp}\PY{o}{.}\PY{n}{ProfileReport}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:} <pandas\_profiling.ProfileReport at 0x1c19e44dd8>
+\end{Verbatim}
+            
+    \subsection{5. Modeling Process:}\label{modeling-process}
+
+    \subsection{Imputation and
+Interpolation}\label{imputation-and-interpolation}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{data}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:} Date              0
+        Condition        72
+        Dew Point       621
+        Fog               0
+        Hail              0
+        Humidity        757
+        Pressure       1125
+        Rain              0
+        Snow              0
+        Temperature     673
+        Thunder           0
+        Tornado           0
+        Visibility     4428
+        Wind Speed     2366
+        dtype: int64
+\end{Verbatim}
+            
+    Variable 'Condition' will require most frequent value imputation because
+it is categorical, and all the numerical data will require
+interpolation.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{nullFeatures} \PY{o}{=} \PY{p}{[}\PY{n}{feature} \PY{k}{for} \PY{n}{feature}\PY{p}{,} \PY{n}{numNull} \PY{o+ow}{in} \PY{n}{data}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{iteritems}\PY{p}{(}\PY{p}{)} \PY{k}{if} \PY{n}{numNull} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{]}
+        \PY{n}{nullFeatures}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} ['Condition',
+         'Dew Point',
+         'Humidity',
+         'Pressure',
+         'Temperature',
+         'Visibility',
+         'Wind Speed']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n}{nullFeatures}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{:} \PY{c+c1}{\PYZsh{} Skip Condition for interpolation}
+            \PY{n}{data}\PY{p}{[}\PY{n}{n}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{n}\PY{p}{]}\PY{o}{.}\PY{n}{interpolate}\PY{p}{(}\PY{p}{)}
+        \PY{n}{data}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:} Date            0
+        Condition      72
+        Dew Point       0
+        Fog             0
+        Hail            0
+        Humidity        0
+        Pressure        0
+        Rain            0
+        Snow            0
+        Temperature     0
+        Thunder         0
+        Tornado         0
+        Visibility      0
+        Wind Speed      0
+        dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n+nb}{print} \PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Condition}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Haze                             47602
+Smoke                            20760
+Mist                              9375
+Clear                             3129
+Widespread Dust                   2856
+Fog                               2760
+Scattered Clouds                  2209
+Partly Cloudy                     2091
+Shallow Fog                       1860
+Mostly Cloudy                     1537
+Light Rain                        1302
+Partial Fog                       1031
+Patches of Fog                     901
+Thunderstorms and Rain             486
+Heavy Fog                          421
+Light Drizzle                      414
+Rain                               394
+Unknown                            383
+Blowing Sand                       378
+Overcast                           326
+Thunderstorm                       192
+Light Thunderstorms and Rain       176
+Drizzle                            112
+Light Thunderstorm                  64
+Light Fog                           64
+Heavy Rain                          28
+Heavy Thunderstorms and Rain        22
+Thunderstorms with Hail             11
+Light Sandstorm                      6
+Squalls                              6
+Light Rain Showers                   5
+Light Haze                           4
+Volcanic Ash                         4
+Rain Showers                         2
+Sandstorm                            2
+Funnel Cloud                         2
+Light Hail Showers                   1
+Heavy Thunderstorms with Hail        1
+Light Freezing Rain                  1
+Name: Condition, dtype: int64
+
+    \end{Verbatim}
+
+    Haze is the most common so we will impute conditions using Haze.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Haze}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{data}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} Date           0
+        Condition      0
+        Dew Point      0
+        Fog            0
+        Hail           0
+        Humidity       0
+        Pressure       0
+        Rain           0
+        Snow           0
+        Temperature    0
+        Thunder        0
+        Tornado        0
+        Visibility     0
+        Wind Speed     0
+        dtype: int64
+\end{Verbatim}
+            
+    Now there are no more null values so we can do supervised and
+unsupervised learning.
+
+    \subsubsection{Association Analysis}\label{association-analysis}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} I tried using all conditions but apriori is 2\PYZca{}n and 51 variables takes too long so I must decrease this number}
+        \PY{c+c1}{\PYZsh{} Before converting weather condition to boolean we must combine similar conditions like light haze and haze}
+        \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Light Haze}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Haze}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Light Fog}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fog}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Heavy Fog}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fog}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Patches of Fog}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fog}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Partial Fog}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fog}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Shallow Fog}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fog}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Light Thunderstorms and Rain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Thunderstorms and Rain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Heavy Thunderstorms and Rain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Thunderstorms and Rain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Light Thunderstorm}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Thunderstorm}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Light Rain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rain Showers}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Light Rain Showers}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Heavy Rain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Light Drizzle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Drizzle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mostly Cloudy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Overcast}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Scattered Clouds}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Clear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Heavy Thunderstorms with Hail}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Thunderstorms with Hail}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Light Hail Showers}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hail}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{associationData} \PY{o}{=} \PY{n}{data}
+\end{Verbatim}
+
+
+    Let us visualize the most frequent conditions using a word cloud.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{wordcloud} \PY{o}{=} \PY{n}{WordCloud}\PY{p}{(}\PY{n}{background\PYZus{}color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsh{}FFFFFF}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{collocations}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{generate}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{wordcloud}\PY{p}{,} \PY{n}{interpolation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bilinear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Most Frequent Weather Conditions in Delhi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_24_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} Now I convert the condition to booleans using get dummies one hot encoding}
+         \PY{n}{categories} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{associationData}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{prefix}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{associationData}\PY{o}{.}\PY{n}{columns}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n+nb}{set}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} Next I drop the conditon unknown which is not useful}
+         \PY{n}{categories} \PY{o}{=} \PY{n}{categories}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition\PYZus{}Unknown}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{k}{for} \PY{n}{index}\PY{p}{,} \PY{n}{row} \PY{o+ow}{in} \PY{n}{categories}\PY{o}{.}\PY{n}{iterrows}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} I drop Thunderstorms and Rain and instead make Rain true and Thunderstorm true also}
+             \PY{k}{if} \PY{n}{categories}\PY{o}{.}\PY{n}{at}\PY{p}{[}\PY{n}{index}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition\PYZus{}Thunderstorms and Rain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:}
+                 \PY{n}{categories}\PY{o}{.}\PY{n}{at}\PY{p}{[}\PY{n}{index}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition\PYZus{}Rain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+                 \PY{n}{categories}\PY{o}{.}\PY{n}{at}\PY{p}{[}\PY{n}{index}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition\PYZus{}Thunderstorm}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+             \PY{c+c1}{\PYZsh{} I drop Thunderstorms and Hail and instead make Hail true and Thunderstorm true also}
+             \PY{k}{if} \PY{n}{categories}\PY{o}{.}\PY{n}{at}\PY{p}{[}\PY{n}{index}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition\PYZus{}Thunderstorms with Hail}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:}
+                 \PY{n}{categories}\PY{o}{.}\PY{n}{at}\PY{p}{[}\PY{n}{index}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition\PYZus{}Hail}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+                 \PY{n}{categories}\PY{o}{.}\PY{n}{at}\PY{p}{[}\PY{n}{index}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition\PYZus{}Thunderstorm}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+         \PY{c+c1}{\PYZsh{} Now I can remove these categories}
+         \PY{n}{categories} \PY{o}{=} \PY{n}{categories}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition\PYZus{}Thunderstorms with Hail}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{categories} \PY{o}{=} \PY{n}{categories}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition\PYZus{}Thunderstorms and Rain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{size} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{categories}\PY{p}{)}
+         \PY{n}{frequencies} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+         \PY{k}{for} \PY{n}{category} \PY{o+ow}{in} \PY{n+nb}{list}\PY{p}{(}\PY{n}{categories}\PY{o}{.}\PY{n}{columns}\PY{p}{)}\PY{p}{:}
+             \PY{n}{frequencies}\PY{p}{[}\PY{n}{category}\PY{p}{]} \PY{o}{=} \PY{n}{categories}\PY{p}{[}\PY{n}{category}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{n}{size}
+         \PY{n}{frequencies} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{o}{.}\PY{n}{from\PYZus{}dict}\PY{p}{(}\PY{n}{frequencies}\PY{p}{,} \PY{n}{orient}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Frequency}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{categories} \PY{o}{=} \PY{n}{categories}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{frequencies}\PY{p}{[}\PY{n}{frequencies}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Frequency}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{o}{.}\PY{l+m+mi}{0001}\PY{p}{]}\PY{o}{.}\PY{n}{index}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} I drop categories that are found in less than 0.01\PYZpc{} of the observations}
+         \PY{n}{frequencies}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Frequency}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unknown}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Other}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{list}\PY{p}{(}\PY{n}{frequencies}\PY{p}{[}\PY{n}{frequencies}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Frequency}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{o}{.}\PY{l+m+mi}{0001}\PY{p}{]}\PY{o}{.}\PY{n}{index}\PY{p}{)}\PY{p}{:}
+             \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{n}{n}\PY{p}{[}\PY{l+m+mi}{10}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Other}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{booleanFeatures} \PY{o}{=} \PY{n}{associationData}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hail}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Thunder}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fog}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dew Point}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Humidity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pressure}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Temperature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Visibility}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Wind Speed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Now I add the boolean features from the dataset}
+         \PY{n}{booleanFeatures} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{booleanFeatures}\PY{p}{,}\PY{n}{categories}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} This merges the data into one data frame}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{booleanFeatures}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}pp.ProfileReport(booleanFeatures)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(100990, 14)
+
+    \end{Verbatim}
+
+    Apriori algorithm proceeds by identifying the frequent individual items
+in the database and extending them to larger and larger item sets as
+long as those item sets appear sufficiently often in the database. The
+frequent item sets determined by Apriori can be used to determine
+association rules which highlight general trends in the database.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{frequencies} \PY{o}{=} \PY{n}{apriori}\PY{p}{(}\PY{n}{booleanFeatures}\PY{p}{,} \PY{n}{min\PYZus{}support}\PY{o}{=}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{use\PYZus{}colnames}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} I calculate frequencies of item sets}
+         \PY{n}{frequencies} \PY{o}{=} \PY{n}{frequencies}\PY{p}{[}\PY{n}{frequencies}\PY{o}{.}\PY{n}{support} \PY{o}{!=} \PY{l+m+mf}{0.0}\PY{p}{]}
+         \PY{n}{frequencies}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{support}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Frequencies for single items is not useful for rule generation.}
+         \PY{c+c1}{\PYZsh{} Therefore the most frequent pairs of itemsets which occured together matters for rule generation}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:}       support                                  itemsets
+         6    0.472106                          (Condition\_Haze)
+         11   0.205565                         (Condition\_Smoke)
+         7    0.092831                          (Condition\_Mist)
+         4    0.069680                           (Condition\_Fog)
+         3    0.052857                         (Condition\_Clear)
+         10   0.029122                          (Condition\_Rain)
+         13   0.028280               (Condition\_Widespread Dust)
+         9    0.020705                 (Condition\_Partly Cloudy)
+         8    0.018447                      (Condition\_Overcast)
+         12   0.009427                  (Condition\_Thunderstorm)
+         100  0.006773  (Condition\_Rain, Condition\_Thunderstorm)
+         2    0.003743                  (Condition\_Blowing Sand)
+         5    0.000129                          (Condition\_Hail)
+         75   0.000119  (Condition\_Thunderstorm, Condition\_Hail)
+         1    0.000020                                 (Tornado)
+         23   0.000010                    (Condition\_Rain, Snow)
+         0    0.000010                                    (Snow)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{rules} \PY{o}{=} \PY{n}{association\PYZus{}rules}\PY{p}{(}\PY{n}{frequencies}\PY{p}{,} \PY{n}{min\PYZus{}threshold}\PY{o}{=}\PY{l+m+mf}{0.0}\PY{p}{)}
+         \PY{n}{rules}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{confidence}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:}                 antecedents               consequents  antecedent support  \textbackslash{}
+         1                    (Snow)          (Condition\_Rain)            0.000010   
+         3          (Condition\_Hail)  (Condition\_Thunderstorm)            0.000129   
+         5  (Condition\_Thunderstorm)          (Condition\_Rain)            0.009427   
+         4          (Condition\_Rain)  (Condition\_Thunderstorm)            0.029122   
+         2  (Condition\_Thunderstorm)          (Condition\_Hail)            0.009427   
+         0          (Condition\_Rain)                    (Snow)            0.029122   
+         
+            consequent support   support  confidence       lift  leverage  conviction  
+         1            0.029122  0.000010    1.000000  34.338660  0.000010         inf  
+         3            0.009427  0.000119    0.923077  97.921784  0.000118   12.877453  
+         5            0.029122  0.006773    0.718487  24.671895  0.006498    3.448792  
+         4            0.009427  0.006773    0.232574  24.671895  0.006498    1.290774  
+         2            0.000129  0.000119    0.012605  97.921784  0.000118    1.012636  
+         0            0.000010  0.000010    0.000340  34.338660  0.000010    1.000330  
+\end{Verbatim}
+            
+    After using apriori to get item set frequencies and association rules
+generation to get rules, there are six rules and some are more
+confidence than others. We can say with 92.3\% confidence that if we
+observe hail then we will also observe thunder. We can say with 71.8\%
+confidence that if we observe thunder then we will also observe rain.
+
+    What we have done is use the apriori algorithm to find the most frequent
+pairs of features that occur together, then calculate the confidence
+P(A\&\&B)/P(A). High confidence means A -\textgreater{} B is a good
+rule.
+
+    \subsection{Visualizing trends independent of
+seasonality}\label{visualizing-trends-independent-of-seasonality}
+
+    There will be trends in the data but it is periodic so we must normalize
+for seasons.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{tempData} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Temperature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dew Point}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Humidity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pressure}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Visibility}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Wind Speed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{date} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}datetime}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{firstTime} \PY{o}{=} \PY{n}{date}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{k}{for} \PY{n}{n}\PY{p}{,} \PY{n}{d} \PY{o+ow}{in} \PY{n}{date}\PY{o}{.}\PY{n}{iteritems}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} Convert date to number of hours since first observation so the graph will be over time}
+             \PY{n}{tempData}\PY{o}{.}\PY{n}{at}\PY{p}{[}\PY{n}{n}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{p}{(}\PY{n}{d} \PY{o}{\PYZhy{}} \PY{n}{firstTime}\PY{p}{)}\PY{o}{.}\PY{n}{total\PYZus{}seconds}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{3600}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{tempData}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{tempData}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Temperature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time (\PYZsh{} of hours since initial observation)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Temperature (Celsius)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Temperature in Delhi from November 1996 to April 2017}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_39_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{tempData}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{tempData}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Visibility}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time (\PYZsh{} of hours since initial observation)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Visibility (Km)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Visibility in Delhi from November 1996 to April 2017}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_40_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{tempData}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{tempData}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Wind Speed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time (\PYZsh{} of hours since initial observation)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Wind Speed (kph)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Wind Speed in Delhi from November 1996 to April 2017}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_41_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{tempData}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{tempData}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dew Point}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time (\PYZsh{} of hours since initial observation)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dew Point (Celsius)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dew Point in Delhi from November 1996 to April 2017}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_42_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{tempData}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{tempData}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Humidity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time (\PYZsh{} of hours since initial observation)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Humidity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Humidity in Delhi from November 1996 to April 2017}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_43_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{tempData}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{tempData}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pressure}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time (\PYZsh{} of hours since initial observation)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pressure}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pressure in Delhi from November 1996 to April 2017}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_44_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Some of these features will benefit from seasonality normalization and
+some would not. Pressure and Dew Point and Temperature seem periodical
+but Visibility and Humidity and Wind Speed are not so periodical.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{resultTemperature} \PY{o}{=} \PY{n}{seasonal\PYZus{}decompose}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{tempData}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Temperature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{model}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{additive}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{freq}\PY{o}{=}\PY{l+m+mi}{8760}\PY{p}{)}
+         \PY{n}{resultPressure} \PY{o}{=} \PY{n}{seasonal\PYZus{}decompose}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{tempData}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pressure}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{model}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{additive}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{freq}\PY{o}{=}\PY{l+m+mi}{8760}\PY{p}{)}
+         \PY{n}{resultDewPoint} \PY{o}{=} \PY{n}{seasonal\PYZus{}decompose}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{tempData}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dew Point}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{model}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{additive}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{freq}\PY{o}{=}\PY{l+m+mi}{8760}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} I use seasonal decomposition to find the trends independent of seasonal periodicity}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{c+c1}{\PYZsh{} visualize results}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}plt.plot(list(tempData[\PYZsq{}Date\PYZsq{}]), series, label=\PYZsq{}data\PYZsq{})}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{tempData}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{resultTemperature}\PY{o}{.}\PY{n}{observed}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{observed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{tempData}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{resultTemperature}\PY{o}{.}\PY{n}{trend}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{trend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{upper left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time (\PYZsh{} of hours since initial observation)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Temperature (Celsius)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Temperature over Time normalized for seasons}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_47_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    This chart shows the original data in blue, and the trend after
+normalizing for seasons (i.e getting rid of useless data) in orange.
+From this we can see that there was an abnormally cold Winter in Delhi
+in 2003-2004. This does not show the deadly heat wave of 2015 because it
+is smooth and ignores spikes.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{c+c1}{\PYZsh{} visualize results}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}plt.plot(list(tempData[\PYZsq{}Date\PYZsq{}]), series, label=\PYZsq{}data\PYZsq{})}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{tempData}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{resultPressure}\PY{o}{.}\PY{n}{observed}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{observed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{tempData}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{resultPressure}\PY{o}{.}\PY{n}{trend}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{trend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{upper left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time (\PYZsh{} of hours since initial observation)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pressure}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pressure over Time normalized for seasons}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_49_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{c+c1}{\PYZsh{} visualize results}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}plt.plot(list(tempData[\PYZsq{}Date\PYZsq{}]), series, label=\PYZsq{}data\PYZsq{})}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{tempData}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{resultDewPoint}\PY{o}{.}\PY{n}{observed}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{observed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{tempData}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{resultDewPoint}\PY{o}{.}\PY{n}{trend}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{trend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{upper left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time (\PYZsh{} of hours since initial observation)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dew Point (Celsius)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dew Point over Time normalized for seasons}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_50_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Regression}\label{regression}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{c+c1}{\PYZsh{} I will predict temperature and visibility separately}
+         \PY{n}{Xtemp} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Temperature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fog}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hail}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Thunder}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{categories}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{Ytemp} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Temperature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{Xvis} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Visibility}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fog}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hail}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Thunder}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{categories}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{Yvis} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Visibility}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{c+c1}{\PYZsh{} Split into training and testing}
+         \PY{n}{xTrainTemp}\PY{p}{,} \PY{n}{xTestTemp}\PY{p}{,} \PY{n}{yTrainTemp}\PY{p}{,} \PY{n}{yTestTemp} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{Xtemp}\PY{p}{,} \PY{n}{Ytemp}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{n+nb}{int}\PY{p}{(}\PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.10}\PY{p}{)}
+         \PY{n}{xTrainVis}\PY{p}{,} \PY{n}{xTestVis}\PY{p}{,} \PY{n}{yTrainVis}\PY{p}{,} \PY{n}{yTestVis} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{Xvis}\PY{p}{,} \PY{n}{Yvis}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{n+nb}{int}\PY{p}{(}\PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.10}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Linear Regression}\label{linear-regression}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{lrTemp} \PY{o}{=} \PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{xTrainTemp}\PY{p}{,} \PY{n}{yTrainTemp}\PY{p}{)}
+         \PY{n}{lrVis} \PY{o}{=} \PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{xTrainVis}\PY{p}{,} \PY{n}{yTrainVis}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training set score for temperature: }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{lrTemp}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{xTrainTemp}\PY{p}{,} \PY{n}{yTrainTemp}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test set score for temperature: }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{lrTemp}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{xTestTemp}\PY{p}{,} \PY{n}{yTestTemp}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training set score for visibility: }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{lrVis}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{xTrainVis}\PY{p}{,} \PY{n}{yTrainVis}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test set score for visibility: }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{lrVis}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{xTestVis}\PY{p}{,} \PY{n}{yTestVis}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training set score for temperature: 0.94
+Test set score for temperature: 0.94
+Training set score for visibility: 0.49
+Test set score for visibility: 0.48
+
+    \end{Verbatim}
+
+    \subsubsection{Ridge Regression}\label{ridge-regression}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{ridgeTemp} \PY{o}{=} \PY{n}{Ridge}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{xTrainTemp}\PY{p}{,} \PY{n}{yTrainTemp}\PY{p}{)}
+         \PY{n}{ridgeVis} \PY{o}{=} \PY{n}{Ridge}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{xTrainVis}\PY{p}{,} \PY{n}{yTrainVis}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training set score for temperature: }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{ridgeTemp}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{xTrainTemp}\PY{p}{,} \PY{n}{yTrainTemp}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test set score for temperature: }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{ridgeTemp}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{xTestTemp}\PY{p}{,} \PY{n}{yTestTemp}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training set score for visibility: }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{ridgeVis}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{xTrainVis}\PY{p}{,} \PY{n}{yTrainVis}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test set score for visibility: }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{ridgeVis}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{xTestVis}\PY{p}{,} \PY{n}{yTestVis}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training set score for temperature: 0.94
+Test set score for temperature: 0.94
+Training set score for visibility: 0.49
+Test set score for visibility: 0.48
+
+    \end{Verbatim}
+
+    \subsubsection{Decision Tree Regression}\label{decision-tree-regression}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{treeTemp} \PY{o}{=} \PY{n}{DecisionTreeRegressor}\PY{p}{(}\PY{n}{max\PYZus{}depth}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{xTrainTemp}\PY{p}{,} \PY{n}{yTrainTemp}\PY{p}{)}
+         \PY{n}{treeVis} \PY{o}{=} \PY{n}{DecisionTreeRegressor}\PY{p}{(}\PY{n}{max\PYZus{}depth}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{xTrainVis}\PY{p}{,} \PY{n}{yTrainVis}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Tree of depth 5 Training set score for temperature: }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{treeTemp}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{xTrainTemp}\PY{p}{,} \PY{n}{yTrainTemp}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Tree of depth 5 Test set score for temperature: }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{treeTemp}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{xTestTemp}\PY{p}{,} \PY{n}{yTestTemp}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Tree of depth 5 Training set score for visibility: }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{treeVis}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{xTrainVis}\PY{p}{,} \PY{n}{yTrainVis}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Tree of depth 5 Test set score for visibility: }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{treeVis}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{xTestVis}\PY{p}{,} \PY{n}{yTestVis}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Tree of depth 5 Training set score for temperature: 0.91
+Tree of depth 5 Test set score for temperature: 0.91
+Tree of depth 5 Training set score for visibility: 0.50
+Tree of depth 5 Test set score for visibility: 0.49
+
+    \end{Verbatim}
+
+    \subsubsection{Gradient Boosted
+Regression}\label{gradient-boosted-regression}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{gbrTemp} \PY{o}{=} \PY{n}{GradientBoostingRegressor}\PY{p}{(}\PY{p}{)}
+         \PY{n}{gbrTemp}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{xTrainTemp}\PY{p}{,} \PY{n}{yTrainTemp}\PY{p}{)}
+         \PY{n}{gbrVis} \PY{o}{=} \PY{n}{GradientBoostingRegressor}\PY{p}{(}\PY{p}{)}
+         \PY{n}{gbrVis}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{xTrainVis}\PY{p}{,} \PY{n}{yTrainVis}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training set score for temperature: }\PY{l+s+si}{\PYZob{}:.3f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{gbrTemp}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{xTrainTemp}\PY{p}{,} \PY{n}{yTrainTemp}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test set score for temperature: }\PY{l+s+si}{\PYZob{}:.3f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{gbrTemp}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{xTestTemp}\PY{p}{,} \PY{n}{yTestTemp}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training set score for visibility: }\PY{l+s+si}{\PYZob{}:.3f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{gbrVis}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{xTrainVis}\PY{p}{,} \PY{n}{yTrainVis}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test set score for visibility: }\PY{l+s+si}{\PYZob{}:.3f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{gbrVis}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{xTestVis}\PY{p}{,} \PY{n}{yTestVis}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/Users/rohit1/anaconda3/lib/python3.6/site-packages/sklearn/utils/validation.py:578: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n\_samples, ), for example using ravel().
+  y = column\_or\_1d(y, warn=True)
+/Users/rohit1/anaconda3/lib/python3.6/site-packages/sklearn/utils/validation.py:578: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n\_samples, ), for example using ravel().
+  y = column\_or\_1d(y, warn=True)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training set score for temperature: 0.978
+Test set score for temperature: 0.977
+Training set score for visibility: 0.572
+Test set score for visibility: 0.563
+
+    \end{Verbatim}
+
+    \subsubsection{K-Nearest Neighbors
+Regressor}\label{k-nearest-neighbors-regressor}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} this loop tries number of neighbors from 2 to 11}
+             \PY{n}{knnTemp} \PY{o}{=} \PY{n}{KNeighborsRegressor}\PY{p}{(}\PY{n}{n\PYZus{}neighbors}\PY{o}{=}\PY{n}{n}\PY{p}{)}
+             \PY{n}{knnVis} \PY{o}{=} \PY{n}{KNeighborsRegressor}\PY{p}{(}\PY{n}{n\PYZus{}neighbors}\PY{o}{=}\PY{n}{n}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} KNN with 6 neighbors was found to be the most accurate in general}
+             \PY{n}{knnTemp}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{xTrainTemp}\PY{p}{,} \PY{n}{yTrainTemp}\PY{p}{)}
+             \PY{n}{knnVis}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{xTrainVis}\PY{p}{,} \PY{n}{yTrainVis}\PY{p}{)}
+             \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training set score with }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{n}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ neighbors for temperature: }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{knnTemp}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{xTrainTemp}\PY{p}{,} \PY{n}{yTrainTemp}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test set score with }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{n}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ neighbors for temperature: }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{knnTemp}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{xTestTemp}\PY{p}{,} \PY{n}{yTestTemp}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training set score with }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{n}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ neighbors for visibility: }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{knnVis}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{xTrainVis}\PY{p}{,} \PY{n}{yTrainVis}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test set score with }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{n}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ neighbors for visibility: }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{knnVis}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{xTestVis}\PY{p}{,} \PY{n}{yTestVis}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training set score with 4 neighbors for temperature: 0.99
+Test set score with 4 neighbors for temperature: 0.97
+Training set score with 4 neighbors for visibility: 0.72
+Test set score with 4 neighbors for visibility: 0.52
+Training set score with 5 neighbors for temperature: 0.98
+Test set score with 5 neighbors for temperature: 0.97
+Training set score with 5 neighbors for visibility: 0.69
+Test set score with 5 neighbors for visibility: 0.53
+Training set score with 6 neighbors for temperature: 0.98
+Test set score with 6 neighbors for temperature: 0.97
+Training set score with 6 neighbors for visibility: 0.67
+Test set score with 6 neighbors for visibility: 0.53
+Training set score with 7 neighbors for temperature: 0.98
+Test set score with 7 neighbors for temperature: 0.98
+Training set score with 7 neighbors for visibility: 0.66
+Test set score with 7 neighbors for visibility: 0.54
+Training set score with 8 neighbors for temperature: 0.98
+Test set score with 8 neighbors for temperature: 0.98
+Training set score with 8 neighbors for visibility: 0.65
+Test set score with 8 neighbors for visibility: 0.54
+
+    \end{Verbatim}
+
+    At 7 neighbors the model predicted visibility the best, but still much
+worse than temperature. All models could not predict visibility as well
+as temperature which suggests that visibility is a hard feature to
+predict.
+
+    \subsection{Clustering}\label{clustering}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{c+c1}{\PYZsh{} The first problem I had with clustering was the computer would crash because the dataset was too big.}
+         \PY{c+c1}{\PYZsh{} I will only take one observation per day instead of hourly.}
+         \PY{n}{clusterData} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{tempData}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fog}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hail}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Thunder}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{categories}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{n}{clusterData}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(100990, 21)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{drop} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+         \PY{n}{drops} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{index}\PY{p}{,} \PY{n}{row} \PY{o+ow}{in} \PY{n}{clusterData}\PY{o}{.}\PY{n}{iterrows}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n+nb}{int}\PY{p}{(}\PY{n}{clusterData}\PY{o}{.}\PY{n}{at}\PY{p}{[}\PY{n}{index}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{/} \PY{l+m+mi}{24}\PY{p}{)} \PY{o}{==} \PY{n}{drop}\PY{p}{:}
+                 \PY{n}{drops}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{index}\PY{p}{)}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{drop} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{clusterData}\PY{o}{.}\PY{n}{at}\PY{p}{[}\PY{n}{index}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{/} \PY{l+m+mi}{24}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{clusterData} \PY{o}{=} \PY{n}{clusterData}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{drops}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{clusterData}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{n}{clusterData}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(7346, 21)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{c+c1}{\PYZsh{} I will now use dimensionality reduction before clustering}
+         \PY{n}{pca} \PY{o}{=} \PY{n}{PCA}\PY{p}{(}\PY{n}{n\PYZus{}components}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{pca}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{clusterData}\PY{p}{)}
+         \PY{n}{clusterData} \PY{o}{=} \PY{n}{pca}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{clusterData}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{n}{clusterData}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(7346, 2)
+
+    \end{Verbatim}
+
+    \subsubsection{KMeans}\label{kmeans}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{n}{kmeans} \PY{o}{=} \PY{n}{KMeans}\PY{p}{(}\PY{n}{n\PYZus{}clusters}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{n+nb}{int}\PY{p}{(}\PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n}{kmeans}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{clusterData}\PY{p}{)}
+         \PY{n}{kmeansLabels} \PY{o}{=} \PY{n}{kmeans}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{clusterData}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{GMM}\label{gmm}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{n}{gmm} \PY{o}{=} \PY{n}{GaussianMixture}\PY{p}{(}\PY{n}{n\PYZus{}components}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,} \PY{n}{covariance\PYZus{}type}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{full}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{clusterData}\PY{p}{)}
+         \PY{n}{gmmLabels} \PY{o}{=} \PY{n}{gmm}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{clusterData}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Agglomerative
+Clusutering}\label{agglomerative-clusutering}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n}{agglo} \PY{o}{=} \PY{n}{AgglomerativeClustering}\PY{p}{(}\PY{n}{affinity}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{euclidean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{compute\PYZus{}full\PYZus{}tree}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{auto}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{connectivity}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{linkage}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ward}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{memory}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{n\PYZus{}clusters}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,} \PY{n}{pooling\PYZus{}func}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{deprecated}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{agglo}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{clusterData}\PY{p}{)}
+         \PY{n}{aggloLabels} \PY{o}{=} \PY{n}{agglo}\PY{o}{.}\PY{n}{labels\PYZus{}}
+\end{Verbatim}
+
+
+    \subsubsection{Spectral Clustering}\label{spectral-clustering}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{n}{spectral} \PY{o}{=} \PY{n}{SpectralClustering}\PY{p}{(}\PY{n}{n\PYZus{}clusters}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,} \PY{n}{affinity}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nearest\PYZus{}neighbors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{assign\PYZus{}labels}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kmeans}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{spectral}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{clusterData}\PY{p}{)}
+         \PY{n}{spectralLabels} \PY{o}{=} \PY{n}{spectral}\PY{o}{.}\PY{n}{labels\PYZus{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/Users/rohit1/anaconda3/lib/python3.6/site-packages/sklearn/manifold/spectral\_embedding\_.py:234: UserWarning: Graph is not fully connected, spectral embedding may not work as expected.
+  warnings.warn("Graph is not fully connected, spectral embedding"
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{sharex}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{col}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sharey}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{row}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{clusterData}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{clusterData}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{kmeansLabels}\PY{p}{,} \PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZca{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{40}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{viridis}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{xlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PC1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ylabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PC2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k\PYZhy{}means Clustering}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{clusterData}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{clusterData}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{gmmLabels}\PY{p}{,} \PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZca{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{40}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{viridis}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{xlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PC1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ylabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PC2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Gaussian Mixture Models Clustering}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{clusterData}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{clusterData}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{aggloLabels}\PY{p}{,} \PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZca{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{40}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{viridis}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{xlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PC1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ylabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PC2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Agglomerative Clustering}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{clusterData}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{clusterData}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{spectralLabels}\PY{p}{,} \PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZca{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{40}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{viridis}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{xlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PC1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ylabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PC2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Spectral Clustering}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_79_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Even after PCA dimensionality reduction, the data is clustered into 20
+stripes probably the 20 years. This means that PCA found the most
+important component to be time, and reduced all other features into PC2.
+
+    \subsection{Categorical
+Classification}\label{categorical-classification}
+
+    Try to classify the observations into weather conditions.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{n}{x} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dew Point}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Humidity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pressure}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Temperature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Visibility}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Wind Speed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+         \PY{n}{conditions} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{n+nb}{enumerate}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n}{transfer} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n}{conditions}\PY{p}{[}\PY{n}{n}\PY{p}{]}\PY{p}{:}\PY{n}{n} \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{conditions}\PY{p}{)}\PY{p}{)}\PY{p}{\PYZcb{}}
+         \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{transfer}\PY{p}{[}\PY{n}{n}\PY{p}{]} \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{list}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Categorical Classification without
+PCA}\label{categorical-classification-without-pca}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{n}{X} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dew Point}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Humidity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pressure}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Temperature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Visibility}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Wind Speed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+         \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+         \PY{n}{X} \PY{o}{=} \PY{n}{StandardScaler}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+         \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{n+nb}{int}\PY{p}{(}\PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{names} \PY{o}{=} \PY{p}{[}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Nearest Neighbors}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Decision Tree}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Random Forest}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Neural Net}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+         \PY{c+c1}{\PYZsh{}    \PYZdq{}AdaBoost\PYZdq{},}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Naive Bayes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{}    \PYZdq{}QDA\PYZdq{}]}
+         
+         \PY{n}{classifiers} \PY{o}{=} \PY{p}{[}
+             \PY{n}{KNeighborsClassifier}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,}
+             \PY{n}{DecisionTreeClassifier}\PY{p}{(}\PY{n}{max\PYZus{}depth}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,}
+             \PY{n}{RandomForestClassifier}\PY{p}{(}\PY{n}{max\PYZus{}depth}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{max\PYZus{}features}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}
+             \PY{n}{MLPClassifier}\PY{p}{(}\PY{n}{alpha}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}
+         \PY{c+c1}{\PYZsh{}    AdaBoostClassifier(),}
+             \PY{n}{GaussianNB}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{}    QuadraticDiscriminantAnalysis()]}
+         
+         \PY{c+c1}{\PYZsh{} iterate over classifiers}
+         \PY{k}{for} \PY{n}{name}\PY{p}{,} \PY{n}{clf} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{names}\PY{p}{,} \PY{n}{classifiers}\PY{p}{)}\PY{p}{:}
+             \PY{n}{clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{name} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ Training set score: }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{clf}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{name} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ Testing set score: }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{clf}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Nearest Neighbors Training set score: 82.83\%
+Nearest Neighbors Testing set score: 72.09\%
+Decision Tree Training set score: 70.72\%
+Decision Tree Testing set score: 71.30\%
+Random Forest Training set score: 67.92\%
+Random Forest Testing set score: 67.68\%
+Neural Net Training set score: 70.41\%
+Neural Net Testing set score: 70.34\%
+Naive Bayes Training set score: 62.79\%
+Naive Bayes Testing set score: 62.75\%
+
+    \end{Verbatim}
+
+    \subsubsection{Categorical Classification with
+PCA}\label{categorical-classification-with-pca}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{n}{pca} \PY{o}{=} \PY{n}{PCA}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+         \PY{n}{ratios} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{cumsum}\PY{p}{(}\PY{n}{pca}\PY{o}{.}\PY{n}{explained\PYZus{}variance\PYZus{}ratio\PYZus{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}ratios = temp/(np.arange(len(temp))+1)}
+         \PY{n}{maxRatioIndex} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{ratios}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n}{ratios}\PY{p}{[}\PY{n}{n}\PY{p}{]}\PY{o}{/}\PY{p}{(}\PY{n}{n}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{ratios}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{n}{ratios}\PY{p}{[}\PY{n}{maxRatioIndex}\PY{p}{]}\PY{o}{/}\PY{p}{(}\PY{n}{maxRatioIndex}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{ratios}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{maxRatioIndex} \PY{o}{=} \PY{n}{n}
+         \PY{c+c1}{\PYZsh{}ratios = sorted(ratios)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot} \PY{p}{(}\PY{n}{ratios}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The number of principle components with the highest ratio of variance to components is}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{maxRatioIndex}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Using}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{maxRatioIndex}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{components will preserve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{str}\PY{p}{(}\PY{l+m+mi}{100}\PY{o}{*}\PY{n}{ratios}\PY{p}{[}\PY{n}{maxRatioIndex}\PY{p}{]}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{} o}\PY{l+s+s2}{f the data}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The number of principle components with the highest ratio of variance to components is 1
+Using 1 components will preserve 91.08000000000001\% of the data
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_87_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Even though the highest ratio is 1 component, this is not enough so I
+will use 2.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{n}{pca} \PY{o}{=} \PY{n}{PCA}\PY{p}{(}\PY{n}{n\PYZus{}components}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{pca}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+         \PY{n}{X} \PY{o}{=} \PY{n}{pca}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+         \PY{n}{X} \PY{o}{=} \PY{n}{StandardScaler}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+         \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{n+nb}{int}\PY{p}{(}\PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    Next I will use code from sklearn documentation to test all
+classification algorithms on this problem.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{n+nb}{cmp} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{get\PYZus{}cmap}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{viridis}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{15}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{sharex}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{col}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sharey}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{row}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{12}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{names} \PY{o}{=} \PY{p}{[}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Nearest Neighbors}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Decision Tree}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Random Forest}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Neural Net}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+         \PY{c+c1}{\PYZsh{}    \PYZdq{}AdaBoost\PYZdq{},}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Naive Bayes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{}    \PYZdq{}QDA\PYZdq{}]}
+         
+         \PY{n}{classifiers} \PY{o}{=} \PY{p}{[}
+             \PY{n}{KNeighborsClassifier}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,}
+             \PY{n}{DecisionTreeClassifier}\PY{p}{(}\PY{n}{max\PYZus{}depth}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,}
+             \PY{n}{RandomForestClassifier}\PY{p}{(}\PY{n}{max\PYZus{}depth}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{max\PYZus{}features}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}
+             \PY{n}{MLPClassifier}\PY{p}{(}\PY{n}{alpha}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}
+         \PY{c+c1}{\PYZsh{}    AdaBoostClassifier(),}
+             \PY{n}{GaussianNB}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{}    QuadraticDiscriminantAnalysis()]}
+         
+         \PY{n}{h} \PY{o}{=} \PY{o}{.}\PY{l+m+mi}{02}  \PY{c+c1}{\PYZsh{} step size in the mesh}
+         
+         \PY{n}{rng} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{RandomState}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{X} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{rng}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{n}{size}\PY{o}{=}\PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         
+         \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
+         
+         \PY{n}{x\PYZus{}min}\PY{p}{,} \PY{n}{x\PYZus{}max} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{o}{.}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)} \PY{o}{+} \PY{o}{.}\PY{l+m+mi}{5}
+         \PY{n}{y\PYZus{}min}\PY{p}{,} \PY{n}{y\PYZus{}max} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{o}{.}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)} \PY{o}{+} \PY{o}{.}\PY{l+m+mi}{5}
+         \PY{n}{xx}\PY{p}{,} \PY{n}{yy} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{meshgrid}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{x\PYZus{}min}\PY{p}{,} \PY{n}{x\PYZus{}max}\PY{p}{,} \PY{n}{h}\PY{p}{)}\PY{p}{,}
+                              \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{y\PYZus{}min}\PY{p}{,} \PY{n}{y\PYZus{}max}\PY{p}{,} \PY{n}{h}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} just plot the dataset first}
+         \PY{n}{ax}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{i}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{2}].set\PYZus{}title(\PYZdq{}Input data\PYZdq{})
+         \PY{c+c1}{\PYZsh{} Plot the training points}
+         \PY{n}{ax}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{i}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{2}].scatter(X\PYZus{}train[:, 0], X\PYZus{}train[:, 1], c=y\PYZus{}train, cmap=cmp, edgecolors=\PYZsq{}face\PYZsq{}, s=1.5)
+         \PY{c+c1}{\PYZsh{} Plot the testing points}
+         \PY{n}{ax}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{i}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{2}].scatter(X\PYZus{}test[:, 0], X\PYZus{}test[:, 1], c=y\PYZus{}test, cmap=cmp, alpha=0.6, edgecolors=\PYZsq{}face\PYZsq{}, s=1.5)
+         \PY{n}{ax}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{i}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{2}].set\PYZus{}xlim(xx.min(), xx.max())
+         \PY{n}{ax}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{i}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{2}].set\PYZus{}ylim(yy.min(), yy.max())
+         \PY{n}{ax}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{i}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{2}].set\PYZus{}xticks(())
+         \PY{n}{ax}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{i}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{2}].set\PYZus{}yticks(())
+         \PY{n}{i} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+         
+         \PY{c+c1}{\PYZsh{} iterate over classifiers}
+         \PY{k}{for} \PY{n}{name}\PY{p}{,} \PY{n}{clf} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{names}\PY{p}{,} \PY{n}{classifiers}\PY{p}{)}\PY{p}{:}
+             \PY{n}{clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+             \PY{n}{score} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Plot the decision boundary. For that, we will assign a color to each}
+             \PY{c+c1}{\PYZsh{} point in the mesh [x\PYZus{}min, x\PYZus{}max]x[y\PYZus{}min, y\PYZus{}max].}
+             \PY{k}{if} \PY{n+nb}{hasattr}\PY{p}{(}\PY{n}{clf}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{decision\PYZus{}function}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{Z} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{decision\PYZus{}function}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{c\PYZus{}}\PY{p}{[}\PY{n}{xx}\PY{o}{.}\PY{n}{ravel}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{yy}\PY{o}{.}\PY{n}{ravel}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{Z} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{c\PYZus{}}\PY{p}{[}\PY{n}{xx}\PY{o}{.}\PY{n}{ravel}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{yy}\PY{o}{.}\PY{n}{ravel}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}
+         
+             \PY{c+c1}{\PYZsh{} Put the result into a color plot}
+             \PY{n}{Z} \PY{o}{=} \PY{n}{Z}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{xx}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+             \PY{n}{ax}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{i}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{2}].contourf(xx, yy, Z, cmap=cmp, alpha=.8)
+         
+             \PY{c+c1}{\PYZsh{} Plot the training points}
+             \PY{n}{ax}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{i}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{2}].scatter(X\PYZus{}train[:, 0], X\PYZus{}train[:, 1], c=y\PYZus{}train, cmap=cmp, edgecolors=\PYZsq{}face\PYZsq{}, s=1.5)
+             \PY{c+c1}{\PYZsh{} Plot the testing points}
+             \PY{n}{ax}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{i}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{2}].scatter(X\PYZus{}test[:, 0], X\PYZus{}test[:, 1], c=y\PYZus{}test, cmap=cmp, edgecolors=\PYZsq{}face\PYZsq{}, alpha=0.6, s=1.5)
+         
+             \PY{n}{ax}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{i}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{2}].set\PYZus{}xlim(xx.min(), xx.max())
+             \PY{n}{ax}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{i}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{2}].set\PYZus{}ylim(yy.min(), yy.max())
+             \PY{n}{ax}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{i}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{2}].set\PYZus{}xticks(())
+             \PY{n}{ax}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{i}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{2}].set\PYZus{}yticks(())
+             \PY{n}{ax}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{i}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{2}].set\PYZus{}title(name + \PYZsq{} score: \PYZob{}:.2f\PYZcb{}\PYZpc{}\PYZsq{}.format(score*100))
+             \PY{n}{i} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_92_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    This classification problem is very hard for these algorithms. KNN finds
+interesting patterns in the data but none of the scores are good. The
+different weather conditions are mixed together and separating them is
+almost impossible for these algorithms. It is interesting that without
+PCA reduction these algorithms performed more accurately, but are harder
+to visualize.
+
+    \subsection{Binary Classification}\label{binary-classification}
+
+    Try to classify the observations into hot or cold (above average or
+below average)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{n}{x} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Temperature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fog}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hail}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Thunder}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{categories}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{avgTemp} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Temperature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Temperature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} I convert temperature to binary hot or cold by calculating the average temperature}
+         \PY{c+c1}{\PYZsh{} and dividing the dataset into hotter than average and colder than average.}
+         \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1} \PY{k}{if} \PY{n}{n} \PY{o}{\PYZlt{}} \PY{n}{avgTemp} \PY{k}{else} \PY{l+m+mi}{0} \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{list}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Temperature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Binary Classification without
+PCA}\label{binary-classification-without-pca}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{n}{X} \PY{o}{=} \PY{n}{StandardScaler}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+         \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{n+nb}{int}\PY{p}{(}\PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{names} \PY{o}{=} \PY{p}{[}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Nearest Neighbors}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Decision Tree}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Random Forest}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Neural Net}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+         \PY{c+c1}{\PYZsh{}    \PYZdq{}AdaBoost\PYZdq{},}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Naive Bayes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{}    \PYZdq{}QDA\PYZdq{}]}
+         
+         \PY{n}{classifiers} \PY{o}{=} \PY{p}{[}
+             \PY{n}{KNeighborsClassifier}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,}
+             \PY{n}{DecisionTreeClassifier}\PY{p}{(}\PY{n}{max\PYZus{}depth}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,}
+             \PY{n}{RandomForestClassifier}\PY{p}{(}\PY{n}{max\PYZus{}depth}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{max\PYZus{}features}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}
+             \PY{n}{MLPClassifier}\PY{p}{(}\PY{n}{alpha}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}
+         \PY{c+c1}{\PYZsh{}    AdaBoostClassifier(),}
+             \PY{n}{GaussianNB}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{}    QuadraticDiscriminantAnalysis()]}
+         
+         \PY{c+c1}{\PYZsh{} iterate over classifiers}
+         \PY{k}{for} \PY{n}{name}\PY{p}{,} \PY{n}{clf} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{names}\PY{p}{,} \PY{n}{classifiers}\PY{p}{)}\PY{p}{:}
+             \PY{n}{clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{name} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ Training set score: }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{clf}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{name} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ Testing set score: }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{clf}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Nearest Neighbors Training set score: 98.14\%
+Nearest Neighbors Testing set score: 96.43\%
+Decision Tree Training set score: 93.93\%
+Decision Tree Testing set score: 93.75\%
+Random Forest Training set score: 90.25\%
+Random Forest Testing set score: 90.13\%
+Neural Net Training set score: 96.37\%
+Neural Net Testing set score: 96.46\%
+Naive Bayes Training set score: 47.98\%
+Naive Bayes Testing set score: 47.48\%
+
+    \end{Verbatim}
+
+    \subsubsection{Binary Classification with
+PCA}\label{binary-classification-with-pca}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{n}{pca} \PY{o}{=} \PY{n}{PCA}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+         \PY{n}{ratios} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{cumsum}\PY{p}{(}\PY{n}{pca}\PY{o}{.}\PY{n}{explained\PYZus{}variance\PYZus{}ratio\PYZus{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}ratios = temp/(np.arange(len(temp))+1)}
+         \PY{n}{maxRatioIndex} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{ratios}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n}{ratios}\PY{p}{[}\PY{n}{n}\PY{p}{]}\PY{o}{/}\PY{p}{(}\PY{n}{n}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{ratios}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{n}{ratios}\PY{p}{[}\PY{n}{maxRatioIndex}\PY{p}{]}\PY{o}{/}\PY{p}{(}\PY{n}{maxRatioIndex}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{ratios}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{maxRatioIndex} \PY{o}{=} \PY{n}{n}
+         \PY{c+c1}{\PYZsh{}ratios = sorted(ratios)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot} \PY{p}{(}\PY{n}{ratios}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The number of principle components with the highest ratio of variance to components is}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{maxRatioIndex}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Using}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{maxRatioIndex}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{components will preserve}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{str}\PY{p}{(}\PY{l+m+mi}{100}\PY{o}{*}\PY{n}{ratios}\PY{p}{[}\PY{n}{maxRatioIndex}\PY{p}{]}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{} o}\PY{l+s+s2}{f the data}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The number of principle components with the highest ratio of variance to components is 2
+Using 2 components will preserve 98.44000000000001\% of the data
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_100_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    I will use 2 components.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{n}{pca} \PY{o}{=} \PY{n}{PCA}\PY{p}{(}\PY{n}{n\PYZus{}components}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{pca}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+         \PY{n}{X} \PY{o}{=} \PY{n}{pca}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+         \PY{n}{X} \PY{o}{=} \PY{n}{StandardScaler}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+         \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{n+nb}{int}\PY{p}{(}\PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    Next I will use code from sklearn documentation to test all
+classification algorithms on this problem.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{sharex}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{col}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sharey}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{row}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{12}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n+nb}{cmp} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{RdBu}
+         \PY{n}{cmp\PYZus{}bright} \PY{o}{=} \PY{n}{ListedColormap}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}FF0000}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}0000FF}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{names} \PY{o}{=} \PY{p}{[}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Nearest Neighbors}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Decision Tree}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Random Forest}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Neural Net}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+         \PY{c+c1}{\PYZsh{}    \PYZdq{}AdaBoost\PYZdq{},}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Naive Bayes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{}    \PYZdq{}QDA\PYZdq{}]}
+         
+         \PY{n}{classifiers} \PY{o}{=} \PY{p}{[}
+             \PY{n}{KNeighborsClassifier}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,}
+             \PY{n}{DecisionTreeClassifier}\PY{p}{(}\PY{n}{max\PYZus{}depth}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,}
+             \PY{n}{RandomForestClassifier}\PY{p}{(}\PY{n}{max\PYZus{}depth}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{max\PYZus{}features}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}
+             \PY{n}{MLPClassifier}\PY{p}{(}\PY{n}{alpha}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}
+         \PY{c+c1}{\PYZsh{}    AdaBoostClassifier(),}
+             \PY{n}{GaussianNB}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{}    QuadraticDiscriminantAnalysis()]}
+         
+         \PY{n}{h} \PY{o}{=} \PY{o}{.}\PY{l+m+mi}{02}  \PY{c+c1}{\PYZsh{} step size in the mesh}
+         
+         \PY{n}{rng} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{RandomState}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{X} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{rng}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{n}{size}\PY{o}{=}\PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         
+         \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
+         
+         \PY{n}{x\PYZus{}min}\PY{p}{,} \PY{n}{x\PYZus{}max} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{o}{.}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)} \PY{o}{+} \PY{o}{.}\PY{l+m+mi}{5}
+         \PY{n}{y\PYZus{}min}\PY{p}{,} \PY{n}{y\PYZus{}max} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{o}{.}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)} \PY{o}{+} \PY{o}{.}\PY{l+m+mi}{5}
+         \PY{n}{xx}\PY{p}{,} \PY{n}{yy} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{meshgrid}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{x\PYZus{}min}\PY{p}{,} \PY{n}{x\PYZus{}max}\PY{p}{,} \PY{n}{h}\PY{p}{)}\PY{p}{,}
+                              \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{y\PYZus{}min}\PY{p}{,} \PY{n}{y\PYZus{}max}\PY{p}{,} \PY{n}{h}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} just plot the dataset first}
+         \PY{n}{ax}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{i}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{2}].set\PYZus{}title(\PYZdq{}Input data\PYZdq{})
+         \PY{c+c1}{\PYZsh{} Plot the training points}
+         \PY{n}{ax}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{i}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{2}].scatter(X\PYZus{}train[:, 0], X\PYZus{}train[:, 1], c=y\PYZus{}train, cmap=cmp\PYZus{}bright, edgecolors=\PYZsq{}k\PYZsq{}, s=1.5)
+         \PY{c+c1}{\PYZsh{} Plot the testing points}
+         \PY{n}{ax}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{i}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{2}].scatter(X\PYZus{}test[:, 0], X\PYZus{}test[:, 1], c=y\PYZus{}test, cmap=cmp\PYZus{}bright, alpha=0.6, edgecolors=\PYZsq{}k\PYZsq{}, s=1.5)
+         \PY{n}{ax}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{i}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{2}].set\PYZus{}xlim(xx.min(), xx.max())
+         \PY{n}{ax}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{i}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{2}].set\PYZus{}ylim(yy.min(), yy.max())
+         \PY{n}{ax}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{i}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{2}].set\PYZus{}xticks(())
+         \PY{n}{ax}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{i}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{2}].set\PYZus{}yticks(())
+         \PY{n}{i} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+         
+         \PY{n}{scoresPCA} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+         \PY{c+c1}{\PYZsh{} iterate over classifiers}
+         \PY{n}{scores} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+         \PY{k}{for} \PY{n}{name}\PY{p}{,} \PY{n}{clf} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{names}\PY{p}{,} \PY{n}{classifiers}\PY{p}{)}\PY{p}{:}
+             \PY{n}{clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+             \PY{n}{score} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} Plot the decision boundary. For that, we will assign a color to each}
+             \PY{c+c1}{\PYZsh{} point in the mesh [x\PYZus{}min, x\PYZus{}max]x[y\PYZus{}min, y\PYZus{}max].}
+             \PY{k}{if} \PY{n+nb}{hasattr}\PY{p}{(}\PY{n}{clf}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{decision\PYZus{}function}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{Z} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{decision\PYZus{}function}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{c\PYZus{}}\PY{p}{[}\PY{n}{xx}\PY{o}{.}\PY{n}{ravel}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{yy}\PY{o}{.}\PY{n}{ravel}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{scores}\PY{p}{[}\PY{n}{name}\PY{p}{]} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{decision\PYZus{}function}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{Z} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{c\PYZus{}}\PY{p}{[}\PY{n}{xx}\PY{o}{.}\PY{n}{ravel}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{yy}\PY{o}{.}\PY{n}{ravel}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}
+                 \PY{n}{scores}\PY{p}{[}\PY{n}{name}\PY{p}{]} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Put the result into a color plot}
+             \PY{n}{Z} \PY{o}{=} \PY{n}{Z}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{xx}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+             \PY{n}{ax}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{i}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{2}].contourf(xx, yy, Z, cmap=cmp, alpha=.8)
+         
+             \PY{c+c1}{\PYZsh{} Plot the training points}
+             \PY{n}{ax}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{i}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{2}].scatter(X\PYZus{}train[:, 0], X\PYZus{}train[:, 1], c=y\PYZus{}train, cmap=cmp\PYZus{}bright, edgecolors=\PYZsq{}k\PYZsq{}, s=1.5)
+             \PY{c+c1}{\PYZsh{} Plot the testing points}
+             \PY{n}{ax}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{i}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{2}].scatter(X\PYZus{}test[:, 0], X\PYZus{}test[:, 1], c=y\PYZus{}test, cmap=cmp\PYZus{}bright, edgecolors=\PYZsq{}k\PYZsq{}, alpha=0.6, s=1.5)
+         
+             \PY{n}{ax}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{i}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{2}].set\PYZus{}xlim(xx.min(), xx.max())
+             \PY{n}{ax}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{i}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{2}].set\PYZus{}ylim(yy.min(), yy.max())
+             \PY{n}{ax}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{i}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{2}].set\PYZus{}xticks(())
+             \PY{n}{ax}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{i}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{2}].set\PYZus{}yticks(())
+             \PY{n}{ax}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{i}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{2}].set\PYZus{}title(name + \PYZsq{} score: \PYZob{}:.2f\PYZcb{}\PYZpc{}\PYZsq{}.format(score*100))
+             \PY{n}{i} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_104_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The regions underneath the data points are showing where the model would
+classify points if they existed. These models can classify points in the
+entire space even though these points are mostly on the left side. I
+have shown that these models can classify the dataset into hot and cold.
+
+    The hot/cold classification problem is much more interesting and it's
+more easy for these algorithms. They all found good solutions and KNN
+even found some of the hot points on the bottom. ROC will tell if these
+are accurate classifiers or not.
+
+    \subsubsection{ROC Visualization of Binary
+Classification}\label{roc-visualization-of-binary-classification}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{n}{viridis} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{get\PYZus{}cmap}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{viridis}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{names}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{navy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mf}{1.0}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mf}{1.05}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{False Positive Rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{True Positive Rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Receiver Operating Characteristic}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{n}\PY{p}{,} \PY{n}{name} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{names}\PY{p}{)}\PY{p}{:}
+             \PY{n}{fpr}\PY{p}{,} \PY{n}{tpr}\PY{p}{,} \PY{n}{thresholds} \PY{o}{=} \PY{n}{roc\PYZus{}curve}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{scores}\PY{p}{[}\PY{n}{name}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+             \PY{n}{roc\PYZus{}auc} \PY{o}{=} \PY{n}{auc}\PY{p}{(}\PY{n}{fpr}\PY{p}{,} \PY{n}{tpr}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{fpr}\PY{p}{,} \PY{n}{tpr}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{n}{viridis}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ROC curve for }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{name} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{. (AUC = }\PY{l+s+si}{\PYZpc{}0.2f}\PY{l+s+s1}{)}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{roc\PYZus{}auc}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lower right}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_108_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The area under the curve (lower right legend) is equal to the
+probability that the classifier will rank a randomly chosen positive
+instance higher than a randomly chosen negative one. We want the AUC to
+be as high as possible because that means the curve is as far to the top
+left as possible and at the elbow there is a low false positive rate and
+a high true positive rate.
+
+    \section{Conclusions}\label{conclusions}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
